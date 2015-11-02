@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}welcome{% endblock title%}
+{% block content %}
+    <div class="alert alert-info fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Welcome to bulkvote, a system to easily make votes on lots of items.</strong> 
+        <p>To get started type in a <strong>description</strong> and paste in a <strong>list of items</strong>
+        to vote on (one per line). 
+
+        <p>The two standard choices are "yes" and "no" but feel free to 
+        <strong>change</strong> them or <strong>add new</strong> choices. 
+
+        <p>Your vote will be assigned a unique URL you can share with the voters. 
+        Anyone with the URL can vote or see the results at any time.</p>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Create new vote</h3>
+      </div>
+      <div class="panel-body">
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create vote</button>
+        </form>
+      </div>
+    </div>
+{% endblock content %}
