@@ -16,7 +16,7 @@ class Vote(models.Model):
 
 
 class Item(models.Model):
-    item = models.CharField(max_length=50)
+    item = models.CharField(max_length=500)
     vote = models.ForeignKey('bulkvote.Vote', related_name='items')
 
     def __unicode__(self):
