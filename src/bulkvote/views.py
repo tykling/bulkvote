@@ -9,17 +9,17 @@ def frontpage(request):
     form = CreateVoteForm(request.POST or None)
     if form.is_valid():
         ### create vote
-        vote = Vote.objects.create(description=form.cleaned_data['description'], author=form.cleaned_data['author'])
+        vote = Vote.objects.create(description=form.cleaned_data['description'], author=form.cleaned_data['author'][0:50])
 
         ### create items
         for item in form.cleaned_data['items'].split('\n'):
             if item != '':
-                Item.objects.create(vote=vote, item=item.strip())
+                Item.objects.create(vote=vote, item=item.strip()[0:500])
 
         ### create choices
         for choice in form.cleaned_data['choices'].split('\n'):
             if choice != '':
-                Choice.objects.create(vote=vote, choice=choice.strip())
+                Choice.objects.create(vote=vote, choice=choice.strip()[0:50])
 
         return HttpResponseRedirect(reverse('showvote', kwargs={'uuid': str(vote.uuid)}))
 
